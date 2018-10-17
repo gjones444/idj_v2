@@ -11,7 +11,6 @@ export default class Room extends Component {
   	render() {
 	    return (
 	        <div className="text-center">
-            <h1>Test</h1>
 	        </div>
 	    );
   	}

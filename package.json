@@ -16,6 +16,7 @@
     "cryptojs": "^2.5.3",
     "express": "^4.14.0",
     "express-session": "^1.15.2",
+    "firebase": "4.8.0",
     "passport": "^0.3.2",
     "passport-local": "^1.0.0",
     "pg": "^6.4.1",
@@ -24,7 +25,8 @@
     "react-dom": "^0.14.8",
     "react-router": "^2.8.1",
     "sequelize": "^4.28.6",
-    "sequelize-tokenify": "^0.1.8"
+    "sequelize-tokenify": "^0.1.8",
+    "soundcloud": "^3.3.0"
   },
   "devDependencies": {
     "babel-core": "^6.26.3",

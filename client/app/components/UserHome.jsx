@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Link, browserHistory } from 'react-router';
 import Logout from './Logout';
 import Room from './Room';
+import Playlist from './Playlist';
 
 export default class UserHome extends Component {
     constructor(props) {
@@ -49,7 +50,8 @@ export default class UserHome extends Component {
         </nav>
         <div className="text-center">
             <h1>Welcome to iDJ {this.state.user.name}</h1>
-            <Room />
+              <Playlist />
+              <Room />
           </div>
         </div>
 	    );
