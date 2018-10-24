@@ -9,39 +9,31 @@ export default class Playlist extends Component {
     constructor(props) {
         super(props);
         this.app = firebase.initializeApp(DB_CONFIG);
-        this.database = this.app.database().ref().child('Playlist1')
+        this.database = this.app.database().ref().child('New Playlist')
 
         this.state = {
           playlist_songs: [],
-          songList: [],
+          songList: []
         };
     }
 
 	componentWillMount(){
-    let new_songs = this.state.playlist_songs
+    let playlist_songs = this.state.playlist_songs
 
     SC.initialize({
           client_id: 'ebe2d1362a92fc057ac484fcfb265049'
-        });
+        })
 
-    // Firebase displays data as a snapshot
-    this.database.on('child_added', snap => {
-      // console.log(snap.key)
-      new_songs.push({
-        id: snap.key,
-        song_name: snap.val().song_name,
-      })
-
-      this.setState({
-        playlist_songs: new_songs
-      })
-      (console.log(new_songs))
-
-  })
 }
 
 searchSong(){
     let searchResult = this.refs.songSearch.value;
+
+    if (searchResult === '') {
+      this.setState({
+        songList: []
+      })
+    }
 
     SC.get('/tracks/',{
 			q: searchResult,
@@ -50,14 +42,26 @@ searchSong(){
         this.setState({
           songList: results
         })
-        // console.log(this.state.songList)
     })
+  }
+
+  addToPlaylist(id){
+    let addingSong = this.state.songList.filter(item => item.id == id)[0];
+
+    this.database.push().set({
+      song: addingSong.title,
+      song_id: addingSong.id,
+      uri: addingSong.uri,
+      artwork: addingSong.artwork_url,
+      votes_count: 0,
+    })
+
   }
 
   render() {
     const {songList, index, voteIndex, playlist_db, signedIn, searchIndex} = this.state;
     const searchedSongs = () => {
-      if(songList && songList.length > 0){
+      if(songList.length > 0){
         return(
             <div className="container scroll-search text-center">
                     {
